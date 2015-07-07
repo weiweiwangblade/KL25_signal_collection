@@ -42,6 +42,7 @@
 #include "ASerialLdd1.h"
 #include "Rs485_RE.h"
 #include "BitIoLdd1.h"
+#include "Input_status_1.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -38,6 +38,7 @@
 #include "ASerialLdd1.h"
 #include "Rs485_RE.h"
 #include "BitIoLdd1.h"
+#include "Input_status_1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
