@@ -30,10 +30,12 @@
 #include "Cpu.h"
 #include "Events.h"
 
+#include "global_vars.h"
+#include "communication.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif 
-
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
 
@@ -91,6 +93,65 @@ void AD1_OnEnd(void)
 void AD1_OnCalibrationEnd(void)
 {
   /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  Uart_OnError (module Events)
+**
+**     Component   :  Uart [AsynchroSerial]
+**     Description :
+**         This event is called when a channel error (not the error
+**         returned by a given method) occurs. The errors can be read
+**         using <GetError> method.
+**         The event is available only when the <Interrupt
+**         service/event> property is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void Uart_OnError(void)
+{
+  /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  Uart_OnRxChar (module Events)
+**
+**     Component   :  Uart [AsynchroSerial]
+**     Description :
+**         This event is called after a correct character is received.
+**         The event is available only when the <Interrupt
+**         service/event> property is enabled and either the <Receiver>
+**         property is enabled or the <SCI output mode> property (if
+**         supported) is set to Single-wire mode.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void Uart_OnRxChar(void)
+{
+  /* Write your code here ... */
+	recv_message(recv_message_data);
+}
+
+/*
+** ===================================================================
+**     Event       :  Uart_OnTxChar (module Events)
+**
+**     Component   :  Uart [AsynchroSerial]
+**     Description :
+**         This event is called after a character is transmitted.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void Uart_OnTxChar(void)
+{
+  /* Write your code here ... */
+	message_send_over_flag = 0;
 }
 
 /* END Events */
