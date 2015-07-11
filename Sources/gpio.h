@@ -12,8 +12,6 @@ typedef unsigned char OutputChMask;
 typedef unsigned char OutputStatusMask;
 typedef unsigned char InputStatusMask;
 typedef unsigned char InputChMask;
-#define ON	1
-#define OFF 0
 
 #include "Input_status.h"
 #include "Output_ctrl.h"

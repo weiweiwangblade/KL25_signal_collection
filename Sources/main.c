@@ -39,6 +39,9 @@
 #include "Rs485_RE.h"
 #include "BitIoLdd1.h"
 #include "Input_status_1.h"
+#include "TI1_100ms.h"
+#include "TimerIntLdd1.h"
+#include "TU1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
@@ -48,6 +51,8 @@
 #include "gpio.h"
 #include "global_vars.h"
 #include "communication.h"
+#include "adc.h"
+#include "status_check.h"
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
 
@@ -62,11 +67,26 @@ int main(void)
 
   /* Write your code here */
   /* For example: for(;;) { } */
+  pump_protect_value = 1000;
   gpio_init();
   message_send_over_flag = 0;
+  adc_measure_end_flag = 1;
+  set_output_ctrl(0xff,0x55);
+  data_received_flag = 0;  
+  auto_control = 1;
   for(;;)
   {
-
+	  if(adc_measure_end_flag){
+		  adc_measure_start();
+	  }
+	  if(message_send_enable){
+		  message_send_enable = 0;
+		  send_message(ADC_CHANNELS*2, (unsigned char*)current_values);
+	  }
+	  PH_value_check();
+	  PRE_value_check();
+	  ELEC_value_check();
+	  options_check();
   }
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/

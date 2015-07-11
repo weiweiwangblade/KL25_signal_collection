@@ -23,9 +23,22 @@ unsigned char data_index;
 void recv_message(unsigned char* data_buffer)
 {
 	unsigned char data;
+	data_received_flag = 1;
 	if(data_index >= MESSAGE_LENGTH){
+		message_recv_success = 0;
 		data_index = 0;
 	}
 	Uart_RecvChar(&data);
 	data_buffer[data_index++] = data;
+	if(data_index == 7){
+		message_recv_success = 1;
+	}
+}
+
+unsigned char counter;
+void On_message_send()
+{
+	if((counter++)%5==0){									//500ms
+		message_send_enable = 1;
+	}
 }

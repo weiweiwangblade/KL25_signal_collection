@@ -13,5 +13,6 @@
 
 void send_message(unsigned char length, unsigned char* data_buffer);
 void recv_message(unsigned char* data_buffer);
+void On_message_send();
 
 #endif /* COMMUNICATION_H_ */

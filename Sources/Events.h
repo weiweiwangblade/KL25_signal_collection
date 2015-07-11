@@ -43,6 +43,9 @@
 #include "Rs485_RE.h"
 #include "BitIoLdd1.h"
 #include "Input_status_1.h"
+#include "TI1_100ms.h"
+#include "TimerIntLdd1.h"
+#include "TU1.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -142,6 +145,22 @@ void Uart_OnRxChar(void);
 ** ===================================================================
 */
 void Uart_OnTxChar(void);
+
+/*
+** ===================================================================
+**     Event       :  TI1_100ms_OnInterrupt (module Events)
+**
+**     Component   :  TI1_100ms [TimerInt]
+**     Description :
+**         When a timer interrupt occurs this event is called (only
+**         when the component is enabled - <Enable> and the events are
+**         enabled - <EnableEvent>). This event is enabled only if a
+**         <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void TI1_100ms_OnInterrupt(void);
 
 /* END Events */
 

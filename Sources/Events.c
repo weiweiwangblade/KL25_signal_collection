@@ -32,6 +32,7 @@
 
 #include "global_vars.h"
 #include "communication.h"
+#include "adc.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -74,6 +75,7 @@ void Cpu_OnNMIINT(void)
 void AD1_OnEnd(void)
 {
   /* Write your code here ... */
+	On_get_cur_value(adc_values);
 }
 
 /*
@@ -152,6 +154,27 @@ void Uart_OnTxChar(void)
 {
   /* Write your code here ... */
 	message_send_over_flag = 0;
+}
+
+/*
+** ===================================================================
+**     Event       :  TI1_100ms_OnInterrupt (module Events)
+**
+**     Component   :  TI1_100ms [TimerInt]
+**     Description :
+**         When a timer interrupt occurs this event is called (only
+**         when the component is enabled - <Enable> and the events are
+**         enabled - <EnableEvent>). This event is enabled only if a
+**         <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void TI1_100ms_OnInterrupt(void)
+{
+  /* Write your code here ... */
+	On_100ms_adc_sample();
+	On_message_send();
 }
 
 /* END Events */
